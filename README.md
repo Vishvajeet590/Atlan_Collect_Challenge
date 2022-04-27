@@ -4,7 +4,7 @@ To read about the design part you can refer to this [Noton notebook.](https://ju
  - - - -
 Steps to run Atlan Collect
 
-1. Clone this repo and other two repos
+1. Clone this repo and other two repos which are [Atlan_Collect_KGS](https://github.com/Vishvajeet590/Atlan_Collect_KGS) and [Atlan_Collect_Ingest](https://github.com/Vishvajeet590/Atlan_Collect_Ingest)
 
         git clone https://github.com/Vishvajeet590/Atlan_Collect_Challenge.git
         git clone https://github.com/Vishvajeet590/Atlan_Collect_KGS.git
