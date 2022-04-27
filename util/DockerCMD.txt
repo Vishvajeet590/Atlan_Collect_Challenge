@@ -1,0 +1,4 @@
+Form Db :   docker run --rm --name my-postgresdb-containserssddss -p 5432:5432 my-postgres-db
+Key Db  :docker run --rm --name my-postgresdb-ke -p 5431:5432 my-postgres-db-key
+
+Form Server : docker run --rm -p 8080:8080 -e DATABASE_URL='postgres://vishwajeet:docker@localhost:5432/Hermes?&pool_max_conns=10' -e KEY_DATABASE_URL='postgres://vishwajeet:docker@localhost:5431/KeyStore-1?&pool_max_conns=10' --network="host" collect

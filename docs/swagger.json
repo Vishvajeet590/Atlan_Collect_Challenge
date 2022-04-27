@@ -1,0 +1,389 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Atlan collect with plugin feature",
+        "title": "API Atlan Collect",
+        "contact": {
+            "name": "API supporter",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "license(Mandatory)",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "version(1.0)"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/form/create": {
+            "post": {
+                "description": "Endpoint to create form.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "form"
+                ],
+                "summary": "Create Forms.",
+                "parameters": [
+                    {
+                        "description": "Form",
+                        "name": "form",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/formHandler.formReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/formHandler.formId"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/formHandler.message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/formHandler.message"
+                        }
+                    }
+                }
+            }
+        },
+        "/form/{formId}": {
+            "get": {
+                "description": "Endpoint to retrive form.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "form"
+                ],
+                "summary": "Get Forms.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Form id",
+                        "name": "formId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/formHandler.formReq"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/formHandler.message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/formHandler.message"
+                        }
+                    }
+                }
+            }
+        },
+        "/job/status/{jobId}": {
+            "get": {
+                "description": "Endpoint to get the status of the action.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "response"
+                ],
+                "summary": "Get status of the action.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Job id",
+                        "name": "jobId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/jobHandler.job"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/jobHandler.message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/jobHandler.message"
+                        }
+                    }
+                }
+            }
+        },
+        "/response/action": {
+            "post": {
+                "description": "Endpoint to perform action accordingly on all response of a form.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "response"
+                ],
+                "summary": "Take action on all response.",
+                "parameters": [
+                    {
+                        "description": "Action Request",
+                        "name": "form",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/jobHandler.JobRequestSwag"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/jobHandler.message"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/jobHandler.message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/jobHandler.message"
+                        }
+                    }
+                }
+            }
+        },
+        "/response/submit/{formId}/{userId}": {
+            "post": {
+                "description": "Endpoint to submit a new response.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "response"
+                ],
+                "summary": "Add response.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Form id",
+                        "name": "formId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User id",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "ResponseRequest",
+                        "name": "form",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/responseHandler.ResponseRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responseHandler.message"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responseHandler.message"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responseHandler.message"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "formHandler.formId": {
+            "type": "object"
+        },
+        "formHandler.formReq": {
+            "type": "object",
+            "required": [
+                "form_name",
+                "owner_id",
+                "question"
+            ],
+            "properties": {
+                "form_id": {
+                    "type": "integer"
+                },
+                "form_name": {
+                    "type": "string"
+                },
+                "owner_id": {
+                    "type": "integer"
+                },
+                "question": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/formHandler.questionReq"
+                    }
+                }
+            }
+        },
+        "formHandler.message": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "formHandler.questionReq": {
+            "type": "object",
+            "required": [
+                "question",
+                "question_type"
+            ],
+            "properties": {
+                "question": {
+                    "type": "string"
+                },
+                "question_id": {
+                    "type": "integer"
+                },
+                "question_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "jobHandler.JobRequestSwag": {
+            "type": "object",
+            "properties": {
+                "OAuth_code": {
+                    "type": "string"
+                },
+                "form_Id": {
+                    "type": "integer"
+                },
+                "plugin_code": {
+                    "type": "integer"
+                }
+            }
+        },
+        "jobHandler.job": {
+            "type": "object",
+            "properties": {
+                "job_id": {
+                    "type": "integer"
+                },
+                "job_plugin_code": {
+                    "type": "integer"
+                },
+                "job_status": {
+                    "type": "string"
+                },
+                "job_status_code": {
+                    "type": "integer"
+                }
+            }
+        },
+        "jobHandler.message": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "responseHandler.ResponseReq": {
+            "type": "object",
+            "properties": {
+                "question_id": {
+                    "type": "integer"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "response_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "responseHandler.ResponseRequest": {
+            "type": "object",
+            "properties": {
+                "response_id": {
+                    "type": "integer"
+                },
+                "responses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/responseHandler.ResponseReq"
+                    }
+                }
+            }
+        },
+        "responseHandler.message": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

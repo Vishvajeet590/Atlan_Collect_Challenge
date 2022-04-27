@@ -1,0 +1,256 @@
+basePath: /
+definitions:
+  formHandler.formId:
+    type: object
+  formHandler.formReq:
+    properties:
+      form_id:
+        type: integer
+      form_name:
+        type: string
+      owner_id:
+        type: integer
+      question:
+        items:
+          $ref: '#/definitions/formHandler.questionReq'
+        type: array
+    required:
+    - form_name
+    - owner_id
+    - question
+    type: object
+  formHandler.message:
+    properties:
+      message:
+        type: string
+    type: object
+  formHandler.questionReq:
+    properties:
+      question:
+        type: string
+      question_id:
+        type: integer
+      question_type:
+        type: string
+    required:
+    - question
+    - question_type
+    type: object
+  jobHandler.JobRequestSwag:
+    properties:
+      OAuth_code:
+        type: string
+      form_Id:
+        type: integer
+      plugin_code:
+        type: integer
+    type: object
+  jobHandler.job:
+    properties:
+      job_id:
+        type: integer
+      job_plugin_code:
+        type: integer
+      job_status:
+        type: string
+      job_status_code:
+        type: integer
+    type: object
+  jobHandler.message:
+    properties:
+      message:
+        type: string
+    type: object
+  responseHandler.ResponseReq:
+    properties:
+      question_id:
+        type: integer
+      response:
+        type: string
+      response_type:
+        type: string
+    type: object
+  responseHandler.ResponseRequest:
+    properties:
+      response_id:
+        type: integer
+      responses:
+        items:
+          $ref: '#/definitions/responseHandler.ResponseReq'
+        type: array
+    type: object
+  responseHandler.message:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API supporter
+    url: http://www.swagger.io/support
+  description: Atlan collect with plugin feature
+  license:
+    name: license(Mandatory)
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: API Atlan Collect
+  version: version(1.0)
+paths:
+  /form/{formId}:
+    get:
+      description: Endpoint to retrive form.
+      parameters:
+      - description: Form id
+        in: path
+        name: formId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/formHandler.formReq'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/formHandler.message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/formHandler.message'
+      summary: Get Forms.
+      tags:
+      - form
+  /form/create:
+    post:
+      consumes:
+      - application/json
+      description: Endpoint to create form.
+      parameters:
+      - description: Form
+        in: body
+        name: form
+        required: true
+        schema:
+          $ref: '#/definitions/formHandler.formReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/formHandler.formId'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/formHandler.message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/formHandler.message'
+      summary: Create Forms.
+      tags:
+      - form
+  /job/status/{jobId}:
+    get:
+      consumes:
+      - application/json
+      description: Endpoint to get the status of the action.
+      parameters:
+      - description: Job id
+        in: path
+        name: jobId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/jobHandler.job'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/jobHandler.message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/jobHandler.message'
+      summary: Get status of the action.
+      tags:
+      - response
+  /response/action:
+    post:
+      consumes:
+      - application/json
+      description: Endpoint to perform action accordingly on all response of a form.
+      parameters:
+      - description: Action Request
+        in: body
+        name: form
+        required: true
+        schema:
+          $ref: '#/definitions/jobHandler.JobRequestSwag'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/jobHandler.message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/jobHandler.message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/jobHandler.message'
+      summary: Take action on all response.
+      tags:
+      - response
+  /response/submit/{formId}/{userId}:
+    post:
+      consumes:
+      - application/json
+      description: Endpoint to submit a new response.
+      parameters:
+      - description: Form id
+        in: path
+        name: formId
+        required: true
+        type: string
+      - description: User id
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: ResponseRequest
+        in: body
+        name: form
+        required: true
+        schema:
+          $ref: '#/definitions/responseHandler.ResponseRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responseHandler.message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responseHandler.message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responseHandler.message'
+      summary: Add response.
+      tags:
+      - response
+swagger: "2.0"
