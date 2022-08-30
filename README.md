@@ -107,7 +107,6 @@ Here the plugin_code is what action is needed to be performed, currently 1 -> Se
 
 <img src="https://user-images.githubusercontent.com/42716731/165583912-ddcacc5a-2a83-48aa-b607-d2c9b18602ba.png" height="300">
 <img src="https://user-images.githubusercontent.com/42716731/165584408-cdf9f1de-3269-4cba-9a99-f3517044d065.png" height="300">
-<img src="https://user-images.githubusercontent.com/42716731/165584724-557cabcb-e62f-4d0b-ad5f-ea4250b6b131.png"  height="300">
 
 This is the oAuth code required to add file to sheet according google drive api.
 ![Screenshot_20220427_224950](https://user-images.githubusercontent.com/42716731/165584875-5b6791d2-d4fd-4a5c-bc04-103f9c6e59a6.png)
